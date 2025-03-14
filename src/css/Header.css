@@ -1,8 +1,7 @@
 header {
   width: 352px;
-  height: 144px;
   /* border: 2px solid magenta; */
-  margin: 70px 0 36px 0;
+  margin: 70px 0 20px 0;
 }
 
 #header-title {
@@ -20,19 +19,4 @@ header {
   text-align: center;
   color: #8e8e8e;
   /* border: 2px solid blue; */
-}
-
-.header-content {
-  margin-bottom: 20px;
-}
-
-.status-message {
-  width: 353px;
-  height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #7a5ea7;
-  color: #f9f4da;
-  border-radius: 4px;
 }
