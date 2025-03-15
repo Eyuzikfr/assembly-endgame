@@ -15,11 +15,12 @@ body {
 
 main {
   width: 594px;
-  height: 90vh;
+  height: 660px;
   background-color: #282726;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   box-shadow: 2px 2px 10px 0px rgba(255, 255, 255, 0.15);
 }
 
@@ -52,8 +53,9 @@ main {
   height: 55px;
   display: flex;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
   flex-wrap: wrap;
+  margin-bottom: 36px;
 }
 
 .language {
@@ -62,4 +64,68 @@ main {
   height: 24.75px;
   border-radius: 3px;
   padding: 4.5px;
+}
+
+.word-display {
+  display: flex;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 700;
+  gap: 2px;
+  margin-bottom: 36px;
+}
+
+.letter {
+  width: 40px;
+  height: 40px;
+  background-color: #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #f9f4da;
+}
+
+.keyboard {
+  width: 480px;
+  height: 164px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.keyboard > button {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #fcba29;
+  border: 1px solid #d7d7d7;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.1s ease-in-out;
+}
+
+.keyboard > button:hover {
+  background-color: #c99421;
+}
+
+.new-game-btn {
+  cursor: pointer;
+  width: 228px;
+  height: 44px;
+  background-color: #11b5e5;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  color: #1e1e1e;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.1s ease-in-out;
+}
+
+.new-game-btn:hover {
+  background-color: #0f84a7;
 }
