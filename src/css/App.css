@@ -31,10 +31,25 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #10a95b;
   color: #f9f4da;
   border-radius: 4px;
   margin-bottom: 36px;
+}
+
+.status-message.wrong-guess {
+  background-color: #7a5ea7;
+}
+
+.status-message.correct-guess {
+  background-color: rgb(82, 137, 153);
+}
+
+.status-message.won {
+  background-color: #10a95b;
+}
+
+.status-message.lost {
+  background-color: #ba2a2a;
 }
 
 .main-status {

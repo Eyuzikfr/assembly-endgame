@@ -2,8 +2,20 @@ import Header from "./components/Header";
 import { languages } from "./components/languages";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { getFarewellText } from "./components/utils";
+import { getCorrectGuessMessages } from "./components/correctGuessMsg";
 import clsx from "clsx";
 import "./css/App.css";
+
+/**
+ *
+ * *Remaining impelementations
+ * ? farewell messages in status section
+ * ? fix a11y issues
+ * ? make the new game button work
+ * ? choose a random word from a list of words
+ * ? confetti drop when the user wins
+ */
 
 export default function App() {
   // state values
@@ -22,6 +34,10 @@ export default function App() {
   const isGameLost = wrongGuessCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
   console.log(isGameOver);
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
+  console.log(lastGuessedLetter);
+  const isLastGuessIncorrect =
+    lastGuessedLetter && !currentWord.split("").includes(lastGuessedLetter);
 
   // static values
   const alphabets = "abcdefghijklmnopqrstuvwxyz";
@@ -79,14 +95,50 @@ export default function App() {
     );
   });
 
+  const gameStatusClass = clsx({
+    "status-message": true,
+    "wrong-guess": isLastGuessIncorrect,
+    "correct-guess": lastGuessedLetter && !isLastGuessIncorrect,
+    won: isGameWon,
+    lost: isGameLost,
+  });
+
+  const renderGameStatus = () => {
+    const currentLanguage =
+      languages[wrongGuessCount <= 0 ? 0 : wrongGuessCount - 1].name;
+
+    if (isGameWon) {
+      return (
+        <>
+          <h2 className="main-status">You win!</h2>
+          <p className="sub-status">Well done! 🎉</p>
+        </>
+      );
+    } else if (isGameLost) {
+      return (
+        <>
+          <h2 className="main-status">Game over!</h2>
+          <p className="sub-status">
+            You lose! Better start learning Assembly 😭
+          </p>
+        </>
+      );
+    } else if (isLastGuessIncorrect) {
+      return (
+        <h2 className="main-status">{getFarewellText(currentLanguage)}</h2>
+      );
+    } else {
+      if (lastGuessedLetter) {
+        return <h2 className="main-status">{getCorrectGuessMessages()}</h2>;
+      }
+    }
+  };
+
   return (
     <main>
       <div className="header-and-status">
         <Header />
-        <div className="status-message">
-          <h2 className="main-status">You win!</h2>
-          <p className="sub-status">Well done! 🎉</p>
-        </div>
+        <div className={gameStatusClass}>{renderGameStatus()}</div>
       </div>
       <div className="languages-container">{languageElements}</div>
       <div className="word-display">{letterElements}</div>
