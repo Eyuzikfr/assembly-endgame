@@ -64,6 +64,21 @@ main {
   height: 24.75px;
   border-radius: 3px;
   padding: 4.5px;
+  position: relative;
+}
+
+.language.lost::before {
+  content: "💀";
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85rem;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .word-display {

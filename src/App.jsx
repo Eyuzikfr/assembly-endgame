@@ -6,19 +6,42 @@ import clsx from "clsx";
 import "./css/App.css";
 
 export default function App() {
-  const [currentWord, setCurrentWord] = useState("elephant");
+  // state values
+  const [currentWord, setCurrentWord] = useState("react");
   const [guessedLetters, setGuessedLetters] = useState([]);
+
+  // derived values
+  const wrongGuessesArray = guessedLetters.filter(
+    (letter) => !currentWord.includes(letter)
+  );
+  const wrongGuessCount = wrongGuessesArray.length;
+  const isGameWon = currentWord
+    .split("")
+    .every((letter) => guessedLetters.includes(letter));
+  console.log("game won: " + isGameWon);
+  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameOver = isGameWon || isGameLost;
+  console.log(isGameOver);
+
+  // static values
   const alphabets = "abcdefghijklmnopqrstuvwxyz";
 
-  const languageElements = languages.map((lang) => (
-    <span
-      key={nanoid()}
-      className={lang.name + " language"}
-      style={{ backgroundColor: lang.backgroundColor, color: lang.color }}
-    >
-      {lang.name}
-    </span>
-  ));
+  const languageElements = languages.map((lang, index) => {
+    const isLanguageLost = index < wrongGuessCount ? true : false;
+    const lostClass = clsx({
+      language: true,
+      lost: isLanguageLost,
+    });
+    return (
+      <span
+        key={nanoid()}
+        className={"language " + lostClass}
+        style={{ backgroundColor: lang.backgroundColor, color: lang.color }}
+      >
+        {lang.name}
+      </span>
+    );
+  });
 
   const letterElements = currentWord.split("").map((letter, index) => {
     const isGuessed = guessedLetters.includes(letter);
@@ -68,7 +91,7 @@ export default function App() {
       <div className="languages-container">{languageElements}</div>
       <div className="word-display">{letterElements}</div>
       <div className="keyboard">{keyboardElements}</div>
-      <button className="new-game-btn">New Game</button>
+      {isGameOver && <button className="new-game-btn">New Game</button>}
     </main>
   );
 }
