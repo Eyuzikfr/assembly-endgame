@@ -34,6 +34,7 @@ main {
   color: #f9f4da;
   border-radius: 4px;
   margin-bottom: 36px;
+  transition: all 0.2s ease-in-out;
 }
 
 .status-message.farewell {
@@ -167,4 +168,16 @@ main {
 
 .new-game-btn:hover {
   background-color: #0f84a7;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

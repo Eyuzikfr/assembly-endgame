@@ -12,7 +12,7 @@ import "./css/App.css";
  * *Remaining impelementations
  * ✅ farewell messages in status section
  * ✅ disable keyboard when the game is over
- * ? fix a11y issues
+ * ✅ fix a11y issues
  * ? make the new game button work
  * ? choose a random word from a list of words
  * ? confetti drop when the user wins
@@ -24,6 +24,7 @@ export default function App() {
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   // derived values
+  const remainingGuesses = languages.length - 1;
   const wrongGuessesArray = guessedLetters.filter(
     (letter) => !currentWord.includes(letter)
   );
@@ -88,11 +89,10 @@ export default function App() {
       <button
         disabled={isGameOver}
         className={className}
-        aria-label={`${letter} button`}
-        aria-live="polite"
         key={index}
+        aria-disabled={guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
         onClick={() => addGuessedLetter(letter)}
-        value={letter.toUpperCase()}
       >
         {letter.toUpperCase()}
       </button>
@@ -142,10 +142,31 @@ export default function App() {
     <main>
       <div className="header-and-status">
         <Header />
-        <div className={gameStatusClass}>{renderGameStatus()}</div>
+        <div aria-live="polite" role="status" className={gameStatusClass}>
+          {renderGameStatus()}
+        </div>
       </div>
       <div className="languages-container">{languageElements}</div>
       <div className="word-display">{letterElements}</div>
+
+      {/* combined visually-hidden aria-live region for status updates */}
+      <div className="sr-only" aria-live="polite" role="status">
+        <p>
+          {currentWord.includes(lastGuessedLetter)
+            ? `Correct! ${lastGuessedLetter} is in the word.`
+            : `Wrong! ${lastGuessedLetter} is not in the word.`}
+          You have {remainingGuesses} guesses left.
+        </p>
+        <p>
+          Current word:{" "}
+          {currentWord
+            .split("")
+            .map((letter) =>
+              guessedLetters.includes(letter) ? letter + "." : "blank."
+            )
+            .join(" ")}
+        </p>
+      </div>
       <div className="keyboard">{keyboardElements}</div>
       {isGameOver && <button className="new-game-btn">New Game</button>}
     </main>
