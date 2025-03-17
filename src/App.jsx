@@ -159,7 +159,7 @@ export default function App() {
 
   return (
     <main>
-      {isGameWon && <ReactConfetti recycle={false} numberOfPieces={500} />}
+      {isGameWon && <ReactConfetti recycle={false} numberOfPieces={1000} />}
       <div className="header-and-status">
         <Header />
         <div aria-live="polite" role="status" className={gameStatusClass}>
