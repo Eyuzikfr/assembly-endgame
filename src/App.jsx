@@ -2,8 +2,11 @@ import Header from "./components/Header";
 import { languages } from "./components/languages";
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import { getFarewellText } from "./components/utils";
-import { getCorrectGuessMessages } from "./components/correctGuessMsg";
+import {
+  getFarewellText,
+  getCorrectGuessMessages,
+  getWord,
+} from "./components/utils";
 import clsx from "clsx";
 import "./css/App.css";
 
@@ -13,14 +16,16 @@ import "./css/App.css";
  * ✅ farewell messages in status section
  * ✅ disable keyboard when the game is over
  * ✅ fix a11y issues
- * ? make the new game button work
  * ? choose a random word from a list of words
+ * ? make the new game button work
  * ? confetti drop when the user wins
  */
 
 export default function App() {
+  const word = getWord();
+
   // state values
-  const [currentWord, setCurrentWord] = useState("react");
+  const [currentWord, setCurrentWord] = useState(word);
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   // derived values

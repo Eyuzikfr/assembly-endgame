@@ -24,8 +24,15 @@ main {
   box-shadow: 2px 2px 10px 0px rgba(255, 255, 255, 0.15);
 }
 
+.header-and-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .status-message {
-  width: 353px;
+  width: 400px;
   height: 58px;
   display: flex;
   flex-direction: column;
