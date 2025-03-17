@@ -32,7 +32,7 @@ main {
 }
 
 .status-message {
-  width: 400px;
+  width: 380px;
   height: 58px;
   display: flex;
   flex-direction: column;
@@ -130,7 +130,6 @@ main {
 
 .letter.allGuessed {
   background-color: rgba(16, 169, 91, 0.3);
-
 }
 
 .keyboard {

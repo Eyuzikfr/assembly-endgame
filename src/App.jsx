@@ -8,6 +8,7 @@ import {
   getWord,
 } from "./components/utils";
 import clsx from "clsx";
+import ReactConfetti from "react-confetti";
 import "./css/App.css";
 
 /**
@@ -18,7 +19,8 @@ import "./css/App.css";
  * ✅ fix a11y issues
  * ✅ choose a random word from a list of words
  * ✅ make the new game button work
- * ? confetti drop when the user wins
+ * ✅ reveal the missing letters if the user loses
+ * ✅ confetti drop when the user wins
  */
 
 export default function App() {
@@ -38,12 +40,9 @@ export default function App() {
   const isGameWon = currentWord
     .split("")
     .every((letter) => guessedLetters.includes(letter));
-  console.log("game won: " + isGameWon);
   const isGameLost = wrongGuessCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
-  console.log(isGameOver);
   const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
-  console.log(lastGuessedLetter);
   const isLastGuessIncorrect =
     lastGuessedLetter && !currentWord.split("").includes(lastGuessedLetter);
 
@@ -160,6 +159,7 @@ export default function App() {
 
   return (
     <main>
+      {isGameWon && <ReactConfetti />}
       <div className="header-and-status">
         <Header />
         <div aria-live="polite" role="status" className={gameStatusClass}>
