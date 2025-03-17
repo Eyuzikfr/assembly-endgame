@@ -36,7 +36,7 @@ main {
   margin-bottom: 36px;
 }
 
-.status-message.wrong-guess {
+.status-message.farewell {
   background-color: #7a5ea7;
 }
 
@@ -135,7 +135,7 @@ main {
   border: 1px solid #d7d7d7;
   font-size: 16px;
   font-weight: 600;
-  /* transition: all 0.1s ease-in-out; */
+  transition: all 0.1s ease-in-out;
 }
 
 .keyboard > .correct {
@@ -144,6 +144,11 @@ main {
 
 .keyboard > .wrong {
   background-color: #ec5d49;
+}
+
+.keyboard > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .new-game-btn {

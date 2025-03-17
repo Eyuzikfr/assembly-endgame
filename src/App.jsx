@@ -10,7 +10,8 @@ import "./css/App.css";
 /**
  *
  * *Remaining impelementations
- * ? farewell messages in status section
+ * ✅ farewell messages in status section
+ * ✅ disable keyboard when the game is over
  * ? fix a11y issues
  * ? make the new game button work
  * ? choose a random word from a list of words
@@ -85,7 +86,10 @@ export default function App() {
 
     return (
       <button
+        disabled={isGameOver}
         className={className}
+        aria-label={`${letter} button`}
+        aria-live="polite"
         key={index}
         onClick={() => addGuessedLetter(letter)}
         value={letter.toUpperCase()}
@@ -97,7 +101,7 @@ export default function App() {
 
   const gameStatusClass = clsx({
     "status-message": true,
-    "wrong-guess": isLastGuessIncorrect,
+    farewell: isLastGuessIncorrect,
     "correct-guess": lastGuessedLetter && !isLastGuessIncorrect,
     won: isGameWon,
     lost: isGameLost,
