@@ -16,12 +16,13 @@ import "./css/App.css";
  * ✅ farewell messages in status section
  * ✅ disable keyboard when the game is over
  * ✅ fix a11y issues
- * ? choose a random word from a list of words
- * ? make the new game button work
+ * ✅ choose a random word from a list of words
+ * ✅ make the new game button work
  * ? confetti drop when the user wins
  */
 
 export default function App() {
+  // get a random word
   const word = getWord();
 
   // state values
@@ -68,9 +69,18 @@ export default function App() {
 
   const letterElements = currentWord.split("").map((letter, index) => {
     const isGuessed = guessedLetters.includes(letter);
+    const letterStatus = clsx({
+      letter: true,
+      unguessed: isGameOver && !isGuessed,
+      allGuessed: isGameWon,
+    });
     return (
-      <div key={index} className="letter">
-        {isGuessed ? letter.toUpperCase() : ""}
+      <div key={index} className={letterStatus}>
+        {isGuessed
+          ? letter.toUpperCase()
+          : isGameOver
+          ? letter.toUpperCase()
+          : ""}
       </div>
     );
   });
@@ -143,6 +153,11 @@ export default function App() {
     }
   };
 
+  const startNewGame = () => {
+    setCurrentWord(getWord());
+    setGuessedLetters([]);
+  };
+
   return (
     <main>
       <div className="header-and-status">
@@ -173,7 +188,11 @@ export default function App() {
         </p>
       </div>
       <div className="keyboard">{keyboardElements}</div>
-      {isGameOver && <button className="new-game-btn">New Game</button>}
+      {isGameOver && (
+        <button onClick={startNewGame} className="new-game-btn">
+          New Game
+        </button>
+      )}
     </main>
   );
 }

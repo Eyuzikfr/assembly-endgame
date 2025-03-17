@@ -123,6 +123,16 @@ main {
   border-bottom: 1px solid #f9f4da;
 }
 
+.letter.unguessed {
+  background-color: rgba(255, 115, 115, 0.2);
+  color: rgba(217, 217, 217, 0.8);
+}
+
+.letter.allGuessed {
+  background-color: rgba(16, 169, 91, 0.3);
+
+}
+
 .keyboard {
   width: 480px;
   height: 164px;
